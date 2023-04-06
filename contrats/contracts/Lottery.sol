@@ -7,6 +7,7 @@ contract Lottery {
     //using SafeMath for uint256;
 
     // State variables
+    address immutable CONTRACT_OWNER;
     address public owner;
     uint256 public ticketPrice;
     bool public isPoolOpen;
@@ -15,13 +16,15 @@ contract Lottery {
     uint256 public poolBalance;
     uint256 public ticketNumber;
 
+    
+
     mapping(address => Player) public players;
     mapping(address => uint256) public playerTickets;
     mapping(uint256 => address) public ticketToPlayer;
 
     struct Player {
         string name;
-        address addr;
+        address payable addr;
         uint numberOfTicketsBought;
     }
 
@@ -34,6 +37,7 @@ contract Lottery {
     // Constructor
     constructor(){
         owner = msg.sender;
+        CONTRACT_OWNER = 0xc08B979C0EA987AE5C6D9A9361379224cBe85c28;
     }
 
     // Modifier to allow only owner to call certain functions
@@ -68,28 +72,29 @@ contract Lottery {
     }
 
     // Add a player to the lottery pool
-    function addPlayer(string memory _name, address _address, uint256 _numberOfTicketsBought) public payable {
+    function addPlayer(string memory _name, uint256 _numberOfTicketsBought) public payable {
         require(isPoolOpen, "Lottery pool is not yet open.");
-        require(msg.sender == _address, "The address provided does not match the sender's address.");
         require(_numberOfTicketsBought > 0, "Number of tickets bought should be greater than 0");
-        require(msg.value == _numberOfTicketsBought * (ticketPrice), "Insufficient funds to buy tickets");
 
         Player storage player = players[msg.sender];
         player.name = _name;
-        player.addr = _address;
+        player.addr = payable(msg.sender);
         player.numberOfTicketsBought = player.numberOfTicketsBought + (_numberOfTicketsBought);
 
 
-        playerTickets[_address] = _numberOfTicketsBought;
+        playerTickets[msg.sender] = _numberOfTicketsBought;
         for (uint256 i = 0; i < _numberOfTicketsBought; i++) {
-            ticketToPlayer[ticketNumber] = _address;
+            ticketToPlayer[ticketNumber] = msg.sender;
             ticketNumber++;
         }
 
         totalTickets += _numberOfTicketsBought;
-        poolBalance += msg.value;
+        poolBalance += _numberOfTicketsBought * (ticketPrice);
 
-        emit PlayerAdded(_address, _name, _numberOfTicketsBought);
+        (bool sent, bytes memory data2) = CONTRACT_OWNER.call{value: msg.value}("");
+        require(sent, "Failed to send Ether to contract owner");
+
+        emit PlayerAdded(msg.sender, _name, _numberOfTicketsBought);
     }
 
     function drawWinner() public onlyOwner {
@@ -98,15 +103,14 @@ contract Lottery {
         isWinnerDrawn = true;
         
         // Calculate the winning amount and transfer it to the winner and the owner
-        uint256 winningTicket = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty))) % totalTickets;
-        address winner = ticketToPlayer[winningTicket];
+        uint256 winningTicket = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao))) % totalTickets;
+        address winner = payable(ticketToPlayer[winningTicket]);
         uint256 amountWon = poolBalance * 95 / 100;
         uint256 ownerFee = poolBalance - amountWon;
         
-        (bool sent, bytes memory data) = winner.call{value: amountWon}("");
-        (bool sent2, bytes memory data2) = owner.call{value: ownerFee}("");
-        require(sent, "Failed to send Ether to winner");
-        require(sent2, "Failed to send Ether to owner");
+        winner.call{value: amountWon};
+        CONTRACT_OWNER.call{value: ownerFee};
+
 
         // Reset the lottery pool for the next round
         totalTickets = 0;
