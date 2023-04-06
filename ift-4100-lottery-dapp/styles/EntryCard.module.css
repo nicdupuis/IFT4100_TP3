@@ -1,0 +1,170 @@
+
+
+  .wrapper {
+    width: 80%;
+    max-width: 50%;
+  
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    align-items: center;
+    border-radius: 2rem;
+    margin: 50px auto;
+    overflow: hidden;
+    flex-direction: column;
+    background-color: #212530;
+    background-color: 100;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pool {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+    flex: 1;
+  }
+
+  .amountTitle {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: #f2505e;
+  }
+  
+  .addressTitle {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: #f2505e;
+  }
+  
+  .poolAmount {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .goldAccent {
+    color: #ffdf3d;
+  }
+  
+  .btn {
+    background-color: #1e2128;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    place-self: center;
+    color: #f45358;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 1.5rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    border: 1px solid #f45358;
+  }
+
+  .input {
+    background-color: #1e2128;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    place-self: center;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 1.5rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    border: 1px solid #fff;
+  }
+  
+  .recentWinnerTitle {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .winner {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #fff;
+    text-align: center;
+    color: #f45358;
+  }
+  
+  .textAccent {
+    color: #f45358;
+  }
+
+  .inputContainer {
+    width: 100%;
+    height: 100px;
+    color: #f1f1f3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 40px;
+    gap: 20px;
+  }
+  
+  .tableHeader {
+    width: 100%;
+    height: 100px;
+    background-color: #383c47;
+    color: #f1f1f3;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    justify-content: space-between;
+    padding: 10px 40px;
+    border-bottom: 1px solid #31353e;
+  }
+
+  .tableFooter {
+    width: 100%;
+    height: 100px;
+    background-color: #383c47;
+    color: #f1f1f3;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    justify-content: space-between;
+    padding: 10px 40px;
+    border-top: 1px solid #31353e;
+  }
+
+  .drawWinnerBtn {
+    background-color: #242833;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 20%;
+    border: 1px solid #f2505e;
+    border-radius: 1.2rem;
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    cursor: pointer;
+    color: #f2505e;
+  }
+  
