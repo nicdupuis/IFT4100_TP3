@@ -3,7 +3,7 @@ import style from '../styles/EntryCard.module.css'
 import { useAppContext } from '../context/context'
 
 const EntryCard = () => {
-  const { userIsPlayer, enterLottery } = useAppContext()
+  const { userIsOwner, userIsPlayer, enterLottery, poolIsOpen } = useAppContext()
   const [name, setName] = useState('')
   const [numTickets, setNumTickets] = useState(0)
 
@@ -21,7 +21,7 @@ const EntryCard = () => {
 
   return (
     <>
-      {!userIsPlayer ? (
+      {poolIsOpen && !(userIsPlayer || userIsOwner) ? (
         <div className={style.wrapper}>
           <div className={style.tableHeader}>
             <div className={style.addressTitle}>👨‍🚀 User Name</div>

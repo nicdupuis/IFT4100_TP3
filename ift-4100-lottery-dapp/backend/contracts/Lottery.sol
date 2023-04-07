@@ -31,9 +31,9 @@ contract Lottery {
 
     // Constructor
     constructor(){
-        owner = 0xc08B979C0EA987AE5C6D9A9361379224cBe85c28;
-        CONTRACT_OWNER = 0xc08B979C0EA987AE5C6D9A9361379224cBe85c28;
-        lotteryID = 0;
+        owner = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
+        CONTRACT_OWNER = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
+        lotteryID = 1;
         totalTickets = 0;
         ticketPrice = 0;
         poolBalance = 0;
@@ -93,18 +93,13 @@ contract Lottery {
     //========== SETTERS ==========//
 
     // Open the lottery pool
-    function openPool() public onlyOwner {
-        require(ticketPrice > 0, "Ticket price must be set.");
-        isPoolOpen = true;
-
-        emit PoolOpened(ticketPrice);
-    }
-
-    // Set the ticket price
-     function setTicketPrice(uint256 _ticketPrice) public onlyOwner{
+    function openPool(uint256 _ticketPrice) public onlyOwner {
         require(!isPoolOpen, "Lottery pool is already open.");
+        require(ticketPrice > 0, "Ticket price must be set.");
         require(_ticketPrice > 0, "Ticket price must be greater than 0.");
+        isPoolOpen = true;
         ticketPrice = _ticketPrice;
+        emit PoolOpened(ticketPrice);
     }
 
     //========== METHODS ==========//
@@ -149,6 +144,7 @@ contract Lottery {
         // Reset the lottery pool for the next round
         totalTickets = 0;
         poolBalance = 0;
+        ticketPrice = 0;
         lotteryID++;
 
         players = new address payable[](0);

@@ -67,10 +67,10 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const openPool = async () => {
+  const openPool = async (price) => {
     try {
       console.log('Opening lottery pool')
-      let tx = await myContract.methods.openPool().send({
+      let tx = await myContract.methods.openPool(price).send({
         from: address,
         gas: 300000,
         gasPrice: null,
@@ -83,26 +83,9 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const setTicketPrice = async () => {
-    try {
-      console.log('Setting lottery ticket price')
-      let tx = await myContract.methods.setTicketPrice().send({
-        from: address,
-        gas: 300000,
-        gasPrice: null,
-      })
-
-      console.log(tx)
-      updateLottery()
-    } catch (err) {
-      console.log(err, 'setTicketPrice')
-    }
-  }
-
-
   const pickWinner = async () => {
     try {
-      let tx = await myContract.methods.pickWinner().send({
+      let tx = await myContract.methods.drawWinner().send({
         from: address,
         gas: 300000,
         gasPrice: null,
@@ -180,7 +163,6 @@ export const AppProvider = ({ children }) => {
         lotteryID,
         lastWinner,
         etherscanUrl,
-        setTicketPrice,
         openPool,
         poolIsOpen,
         userIsOwner,
