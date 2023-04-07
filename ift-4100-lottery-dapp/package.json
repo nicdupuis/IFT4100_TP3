@@ -19,9 +19,10 @@
     "next": "^13.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-toastify": "^9.1.2",
+    "solc": "^0.8.11",
     "truncate-eth-address": "^1.0.2",
-    "web3": "^1.7.0",
-    "solc": "^0.8.11"
+    "web3": "^1.7.0"
   },
   "devDependencies": {
     "ts-loader": "^9.4.2",

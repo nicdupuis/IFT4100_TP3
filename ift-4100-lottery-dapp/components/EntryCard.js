@@ -21,6 +21,8 @@ const EntryCard = () => {
 
   const handleEnterLottery = () => {
     enterLottery(name, numTickets)
+    setName("")
+    setNumTickets(0)
   }
 
   return (

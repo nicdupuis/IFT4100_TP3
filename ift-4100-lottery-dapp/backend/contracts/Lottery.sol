@@ -8,7 +8,6 @@ contract Lottery {
 
     // State variables
     address immutable CONTRACT_OWNER;
-    address public owner;
     uint256 public ticketPrice;
     uint public lotteryID;
     bool public isPoolOpen;
@@ -35,7 +34,6 @@ contract Lottery {
 
     // Constructor
     constructor(){
-        owner = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
         CONTRACT_OWNER = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
         lotteryID = 1;
         totalTickets = 0;
@@ -45,7 +43,7 @@ contract Lottery {
 
     // Modifier to allow only owner to call certain functions
     modifier onlyOwner{
-        require(msg.sender == owner, "Only the contract owner can call this function.");
+        require(msg.sender == CONTRACT_OWNER, "Only the contract owner can call this function.");
         _;
     }
 
@@ -55,7 +53,7 @@ contract Lottery {
     }
 
     function IsUserOwner() public view returns (bool) {
-        return msg.sender == owner;
+        return msg.sender == CONTRACT_OWNER;
     }
 
     function IsUserPlayer() public view returns (bool) {

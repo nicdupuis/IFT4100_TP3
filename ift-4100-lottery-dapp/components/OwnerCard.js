@@ -3,12 +3,14 @@ import { useAppContext } from '../context/context'
 import { useState } from 'react'
 
 const OwnerCard = () => {
-  //const [lotteryTicketPrice, setLotteryTicketPrice] = useState(0)
-
   const { lotteryTicketPrice, setTicketPrice, poolIsOpen, userIsOwner, pickWinner, openPool } = useAppContext()
 
   const handleTicketPriceChange = (event) => {
-    setTicketPrice(parseInt(event.target.value))
+    const newValue = parseInt(event.target.value);
+    if (isNaN(newValue) || newValue <= 0) {
+      return; // do nothing if the input value is not a number or less than or equal to 0
+    }
+    setTicketPrice(newValue)
   }
 
   return (

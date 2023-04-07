@@ -2,6 +2,8 @@ import { createContext, useState, useEffect, useContext } from 'react'
 import Web3 from 'web3'
 export const appContext = createContext()
 import {LotteryContract, LotteryWeb3} from '../utils/lottery'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const AppProvider = ({ children }) => {
   const [web3, setWeb3] = useState()
@@ -86,16 +88,26 @@ export const AppProvider = ({ children }) => {
         gas: 300000,
         gasPrice: null,
       })
+
+      toast.success(name +' just joined the pool with ' + numberOfTicketsBought + 'tickets!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+
       updateLottery()
     } catch (err) {
       console.log(err, 'enterLottery')
+
+      toast.error('Something went wrong while entering the pool!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
     }
   }
 
   const openPool = async () => {
     try {
       console.log('Opening lottery pool')
-      console.log('Ticket Price: ', lotteryTicketPrice, '$')
       let tx = await LotteryContract.methods.openPool(lotteryTicketPrice).send({
         from: address,
         gas: 300000,
@@ -103,9 +115,20 @@ export const AppProvider = ({ children }) => {
       })
 
       console.log(tx)
+
+      toast.success('The pool just opened!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+
       updateLottery()
     } catch (err) {
       console.log(err, 'openPool')
+
+      toast.error('Something went wrong while opening the pool!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
     }
   }
 
@@ -119,9 +142,20 @@ export const AppProvider = ({ children }) => {
 
       console.log(tx)
       setEtherscanUrl('https://ropsten.etherscan.io/tx/' + tx.transactionHash)
+
+      toast.success('The winner just won ' + lotteryPool + 'ETH!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
+
       updateLottery()
     } catch (err) {
       console.log(err, 'draw Winner')
+
+      toast.error('Something went wrong while picking a winner!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 3000,
+      });
     }
   }
 
@@ -139,9 +173,18 @@ export const AppProvider = ({ children }) => {
         window.ethereum.on('accountsChanged', async () => {
           const accounts = await web3.eth.getAccounts()
           setAddress(accounts[0])
+          toast.success('Connected!', {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: 3000,
+          });
           updateLottery()
         })
    
+        toast.success('Connected!', {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 3000,
+        });
+
         // Only call updateLottery after getAccounts has completed
         updateLottery()
       } catch (err) {
@@ -166,6 +209,7 @@ export const AppProvider = ({ children }) => {
         /* clear the address from state */
         setAddress(null)
         /* clear the lottery contract from state */
+        updateLottery()
       }
     } catch (err) {
       console.log(err, 'disconnect Wallet')
