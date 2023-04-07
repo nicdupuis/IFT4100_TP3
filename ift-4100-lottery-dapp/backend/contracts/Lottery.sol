@@ -18,16 +18,20 @@ contract Lottery {
     uint256 public ticketNumber;
 
     address[] public winners;
-    address payable[] public players;
-    mapping(address => string) public playerName;
+    Player[] public players;
     mapping(address => uint256) public playerTickets;
     mapping(uint256 => address) public ticketToPlayer;
+
+    struct Player {
+        string name;
+        address payable addr;
+        uint256 numOfTickets;
+    }
 
     // Events
     event PoolOpened(uint256 ticketPrice);
     event PlayerAdded(address indexed playerAddress, string name, uint256 numberOfTicketsBought);
     event LotteryWinner(address winner, uint256 prize);
-    event LotteryLoser(address loser);
 
     // Constructor
     constructor(){
@@ -56,7 +60,7 @@ contract Lottery {
 
     function IsUserPlayer() public view returns (bool) {
         for (uint i = 0; i < players.length; i++) {
-            if (players[i] == msg.sender) {
+            if (players[i].addr == msg.sender) {
                 return true;
             }
         }
@@ -77,7 +81,7 @@ contract Lottery {
         return ticketPrice;
     }
 
-    function getPlayers() public view returns (address payable[] memory) {
+    function getPlayers() public view returns (Player[] memory) {
         return players;
     }
 
@@ -89,27 +93,29 @@ contract Lottery {
         return winners;
     }
 
-    
-    //========== SETTERS ==========//
+    //========== METHODS ==========//
 
     // Open the lottery pool
     function openPool(uint256 _ticketPrice) public onlyOwner {
         require(!isPoolOpen, "Lottery pool is already open.");
-        require(ticketPrice > 0, "Ticket price must be set.");
         require(_ticketPrice > 0, "Ticket price must be greater than 0.");
+        isWinnerDrawn = false;
         isPoolOpen = true;
         ticketPrice = _ticketPrice;
         emit PoolOpened(ticketPrice);
     }
 
-    //========== METHODS ==========//
     // Add a player to the lottery pool
     function enterPool(string memory _name, uint256 _numberOfTicketsBought) public payable {
         require(isPoolOpen, "Lottery pool is not yet open.");
         require(_numberOfTicketsBought > 0, "Number of tickets bought should be greater than 0");
 
-        players.push(payable(msg.sender));
-        playerName[msg.sender] = _name;
+        // Create new Player instance
+        Player memory newPlayer = Player(_name, payable(msg.sender), _numberOfTicketsBought);
+
+        // Add new player to players array
+        players.push(newPlayer);
+
         playerTickets[msg.sender] = _numberOfTicketsBought;
         for (uint256 i = 0; i < _numberOfTicketsBought; i++) {
             ticketToPlayer[ticketNumber] = msg.sender;
@@ -142,12 +148,24 @@ contract Lottery {
 
 
         // Reset the lottery pool for the next round
+        isPoolOpen = false;
         totalTickets = 0;
         poolBalance = 0;
         ticketPrice = 0;
         lotteryID++;
 
-        players = new address payable[](0);
+        // Reset mappings for player's tickets and ticket numbers
+        for (uint256 i = 0; i < ticketNumber; i++) {
+            delete ticketToPlayer[i];
+        }
+        ticketNumber = 0;
+
+        for (uint256 i = 0; i < players.length; i++) {
+            delete playerTickets[players[i].addr];
+        }
+
+        // Reset players array
+        delete players;
 
         // Emit an event with the winner and the winning amount
         emit LotteryWinner(winner, amountWon);

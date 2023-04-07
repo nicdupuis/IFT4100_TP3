@@ -3,7 +3,7 @@ import style from '../styles/EntryCard.module.css'
 import { useAppContext } from '../context/context'
 
 const EntryCard = () => {
-  const { userIsOwner, userIsPlayer, enterLottery, poolIsOpen } = useAppContext()
+  const { address, userIsOwner, userIsPlayer, enterLottery, poolIsOpen } = useAppContext()
   const [name, setName] = useState('')
   const [numTickets, setNumTickets] = useState(0)
 
@@ -12,7 +12,11 @@ const EntryCard = () => {
   }
 
   const handleNumberOfTicketsChange = (event) => {
-    setNumTickets(parseInt(event.target.value))
+    const newValue = parseInt(event.target.value);
+    if (isNaN(newValue) || newValue <= 0) {
+      return; // do nothing if the input value is not a number or less than or equal to 0
+    }
+    setNumTickets(parseInt(newValue))
   }
 
   const handleEnterLottery = () => {
@@ -21,7 +25,7 @@ const EntryCard = () => {
 
   return (
     <>
-      {poolIsOpen && !(userIsPlayer || userIsOwner) ? (
+      {address && poolIsOpen && !(userIsPlayer || userIsOwner) ? (
         <div className={style.wrapper}>
           <div className={style.tableHeader}>
             <div className={style.addressTitle}>👨‍🚀 User Name</div>
@@ -43,9 +47,9 @@ const EntryCard = () => {
               onChange={handleNumberOfTicketsChange}
             />
           </div>
-          <div className={style.btn} onClick={handleEnterLottery}>
+          <button className={style.btn} onClick={handleEnterLottery}   disabled={name === '' || numTickets <= 0} >
             Enter
-          </div>
+          </button>
         </div>
       ) : null}
     </>

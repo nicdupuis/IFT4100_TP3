@@ -3,16 +3,12 @@ import { useAppContext } from '../context/context'
 import { useState } from 'react'
 
 const OwnerCard = () => {
-  const [lotteryTicketPrice, setLotteryTicketPrice] = useState(0)
+  //const [lotteryTicketPrice, setLotteryTicketPrice] = useState(0)
 
-  const { poolIsOpen, userIsOwner, pickWinner, openPool } = useAppContext()
+  const { lotteryTicketPrice, setTicketPrice, poolIsOpen, userIsOwner, pickWinner, openPool } = useAppContext()
 
   const handleTicketPriceChange = (event) => {
-    setLotteryTicketPrice(parseInt(event.target.value))
-  }
-
-  const handleOpenPool = () => {
-    openPool(lotteryTicketPrice)
+    setTicketPrice(parseInt(event.target.value))
   }
 
   return (
@@ -45,7 +41,7 @@ const OwnerCard = () => {
               Draw Winner!
             </div>
           ) : (
-            <div className={style.btn} onClick={handleOpenPool}>
+            <div className={style.btn} onClick={openPool}>
               Open Pool!
             </div>
           )}

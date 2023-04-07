@@ -13,8 +13,8 @@ export default function Home() {
       <Header />
       <OwnerCard />
       <PotCard />
-      <EntryCard />
       <Table />
+      <EntryCard />
       <Footer />
     </div>
   )
