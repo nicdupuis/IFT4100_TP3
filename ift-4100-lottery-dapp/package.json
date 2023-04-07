@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compile": "solcjs --abi --include-path node_modules/ --base-path .  backend/contracts/Lottery.sol --output-dir ./backend/contracts/build"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.1.9",
@@ -15,11 +16,12 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.37.0",
     "eslint-config-next": "^13.2.4",
-    "next": "^13.2.4",
+    "next": "^13.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "truncate-eth-address": "^1.0.2",
-    "web3": "^0.20.7"
+    "web3": "^1.7.0",
+    "solc": "^0.8.11"
   },
   "devDependencies": {
     "ts-loader": "^9.4.2",

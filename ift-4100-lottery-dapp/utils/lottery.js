@@ -1,7 +1,10 @@
 import { LotteryAddress, lotteryABI } from './constants'
+import Web3 from 'web3'
 
-const createLotteryContract = web3 => {
-  return new web3.eth.Contract(lotteryABI, LotteryAddress)
-}
+const provider = new Web3.providers.HttpProvider("http://localhost:7545")
 
-export default createLotteryContract
+const w3 = new Web3("http://localhost:7545")
+
+const myContract = new w3.eth.Contract(lotteryABI, LotteryAddress)
+
+export {myContract, w3}

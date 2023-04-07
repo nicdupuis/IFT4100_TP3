@@ -1,5 +1,5 @@
 import abi from './Lottery.json'
 
-export const lotteryABI = abi.abi
-export const LotteryAddress = '0x389c838c3d17eeA3b11d2ebe070Dcb14749FEA0f'
+export const lotteryABI = abi
+export const LotteryAddress = '0xe96806cF03a8Fc91AFC2b299E3a8A4e5022eC923'
 

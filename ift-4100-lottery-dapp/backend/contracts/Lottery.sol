@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity ^0.8.18;
 
 //import "@/SafeMath.sol";
 
@@ -31,9 +31,12 @@ contract Lottery {
 
     // Constructor
     constructor(){
-        owner = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
-        CONTRACT_OWNER = 0x0Aa92C26C95Bc8971ba0dE285862D9Bc7FCd5EC9;
+        owner = 0xc08B979C0EA987AE5C6D9A9361379224cBe85c28;
+        CONTRACT_OWNER = 0xc08B979C0EA987AE5C6D9A9361379224cBe85c28;
         lotteryID = 0;
+        totalTickets = 0;
+        ticketPrice = 0;
+        poolBalance = 0;
     }
 
     // Modifier to allow only owner to call certain functions
@@ -67,7 +70,7 @@ contract Lottery {
 
     // Get the current balance of the lottery pool
     function getPoolBalance() public view returns (uint256) {
-        return totalTickets * (ticketPrice);
+        return poolBalance;
     }
 
     function getTicketPrice() public view returns (uint256) {
