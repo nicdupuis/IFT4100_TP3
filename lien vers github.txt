@@ -1,1 +1,1 @@
-https://github.com/nicdupuis/IFT4100_TP3
+Lien GitHub vers le code source: https://github.com/nicdupuis/IFT4100_TP3
