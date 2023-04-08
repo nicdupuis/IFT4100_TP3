@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Requirements
 
-1. Ganache
+1. Ganache (have it open)
 2. MetaMask (on your web browser)
 3. Node.js
 
@@ -14,9 +14,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 npm install
 ```
 
-2. Set the owner variable in Lottery.sol to a public key of your choice.
+2. Set the `CONTRACT_OWNER` constant in `backend/contracts/Lottery.sol` (in the constructor) to a public key of your choice.
 
-3. Migrate and deploy the smart contract:
+3. Copy the entire file `Lottery.sol` and paste it in [remix.ethereum.org](Remix)
+
+Compile the contract and click on copy ABI to clipboard.
+Go to `utils/Lottery.json` and replace the old ABI in the file.
+Save the file.
+
+4. Migrate and deploy the smart contract:
 
 ```bash
 cd backend
@@ -28,9 +34,9 @@ truffle build Lottery.sol
 truffle deploy Lottery.sol
 ```
 
-4. Copy the given contract address of the deployement and paste it in the LotteryAddress constant (.utils/constants.js)
+5. Copy the given contract address of the deployement and paste it in the LotteryAddress constant (.utils/constants.js)
 
-5. Run the development server:
+6. Run the development server:
 
 ```bash
 cd ift-4100-lottery-dapp
@@ -42,4 +48,4 @@ yarn dev
 pnpm dev
 ```
 
-6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+7. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
