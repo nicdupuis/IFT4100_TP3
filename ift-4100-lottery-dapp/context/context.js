@@ -33,7 +33,8 @@ export const AppProvider = ({ children }) => {
       try {
         const pool = await LotteryContract.methods.getPoolBalance().call()
 
-        setLotteryPool(LotteryWeb3.utils.fromWei(pool, 'ether'))
+        //LotteryWeb3.utils.fromWei(pool, 'ether')
+        setLotteryPool(pool)
 
         console.log('Pool (in Wei): ', pool, '$')
         console.log('LotteryPool (fromWei): ', lotteryPool, '$')
@@ -143,7 +144,7 @@ export const AppProvider = ({ children }) => {
       console.log(tx)
       setEtherscanUrl('https://ropsten.etherscan.io/tx/' + tx.transactionHash)
 
-      toast.success('The winner just won ' + lotteryPool + 'ETH!', {
+      toast.success('The winner just won ' + lotteryPool + 'WEI!', {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 3000,
       });
