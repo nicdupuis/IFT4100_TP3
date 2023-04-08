@@ -18,9 +18,11 @@ npm install
 
 3. Copy the entire file `Lottery.sol` and paste it in [remix.ethereum.org](Remix)
 
+```
 Compile the contract and click on copy ABI to clipboard.
 Go to `utils/Lottery.json` and replace the old ABI in the file.
 Save the file.
+```
 
 4. Migrate and deploy the smart contract:
 
