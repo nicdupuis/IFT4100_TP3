@@ -16,7 +16,7 @@ npm install
 
 2. Set the `CONTRACT_OWNER` constant in `backend/contracts/Lottery.sol` (in the constructor) to a public key of your choice.
 
-3. Copy the entire file `Lottery.sol` and paste it in [remix.ethereum.org](Remix)
+3. Copy the entire file `Lottery.sol` and paste it in [Remix](remix.ethereum.org)
 
 ```
 Compile the contract and click on copy ABI to clipboard.
