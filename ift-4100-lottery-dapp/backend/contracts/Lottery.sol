@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-//import "@/SafeMath.sol";
-
 contract Lottery {
-    //using SafeMath for uint256;
 
     // State variables
     address immutable CONTRACT_OWNER;
@@ -123,8 +120,7 @@ contract Lottery {
         totalTickets += _numberOfTicketsBought;
         poolBalance += _numberOfTicketsBought * (ticketPrice);
 
-        (bool sent, bytes memory data2) = CONTRACT_OWNER.call{value: msg.value}("");
-        require(sent, "Failed to send Ether to contract owner");
+        CONTRACT_OWNER.call{value: msg.value};
 
         emit PlayerAdded(msg.sender, _name, _numberOfTicketsBought);
     }
