@@ -1,0 +1,38 @@
+# Étudiant 1
+Nom complet: Nicolas Dupuis
+Numéro de dossier (NI): 536931458
+ 
+# Étudiant 2
+Nom complet: Henri Bernard-St-Laurent
+Numéro de dossier (NI): 111285905
+
+
+Critères d'évaluation
+---------------------
+/20 : Rapport vidéo (Qualité des réponses, explications et justifications)
+    Commentaires :
+
+/40 : Interface utilisateur + Contrat intelligent
+    Commentaires :
+
+/15 : Évaluation générale de la sécurité de l'application
+    Commentaires :
+
+/10 : Déploiement du contrat intelligent sur un réseau Ethereum de test
+    Commentaires :
+
+/5 : Qualité du code (noms de variables, nom des fonctions, etc)
+    Commentaires :
+
+
+Pénalités pour non-respect des consignes
+----------------------------------------
+
+
+
+Autres commentaires du correcteur
+---------------------------------
+
+
+
+Total: /90
