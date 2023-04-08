@@ -51,3 +51,11 @@ pnpm dev
 ```
 
 7. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+8. Once you are loaded in, click on connect at the top right. Connect with the Account address you used as the owner of the contract.
+
+9. You must first enter a ticket price (example 2 works well). And then Click on `Open pool!`
+
+10. The pool is now open. You can then switch accounts with Metamask to participate. Use as many accounts as you would like. 
+
+11. When you're done buying tickets, reconnect as the owner. Click on `Draw winner!`
