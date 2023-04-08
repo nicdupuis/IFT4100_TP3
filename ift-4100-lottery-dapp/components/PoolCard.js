@@ -13,7 +13,7 @@ const PoolCard = () => {
       </div>
       {poolIsOpen ? (
           <div className={style.pool}>
-            Pool 🍯: <span className={style.goldAccent}>{lotteryPool} ETH</span>
+            Pool 🍯: <span className={style.goldAccent}>{lotteryPool} WEI</span>
           </div>
       ) : (
         <div className={style.winner}>Pool not open yet!</div>
@@ -21,7 +21,7 @@ const PoolCard = () => {
 
       {poolIsOpen ? (
         <div className={style.pool}>
-          Ticket price💲: <span className={style.goldAccent}>{lotteryTicketPrice} ETH</span>
+          Ticket price💲: <span className={style.goldAccent}>{lotteryTicketPrice} WEI</span>
         </div>
       ) :  null }
 

@@ -7,7 +7,7 @@ const TableRow = ({ playerName, playerAddress, playerAmount }) => {
       <div className={style.address}>{(playerName)}</div>
       <div className={style.address}>{truncateEthAddress(playerAddress)}</div>
       <div className={style.ethAmmount}>
-        <span className={style.goldAccent}>{(playerAmount)} ETH</span>
+        <span className={style.goldAccent}>{(playerAmount)} WEI</span>
       </div>
     </div>
   )
